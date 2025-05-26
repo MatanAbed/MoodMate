@@ -7,6 +7,7 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
     body {
       background: linear-gradient(to bottom right, #f3e8ff, #d1e6ff);
@@ -360,10 +361,79 @@
         transform: translate(-50%, 10px);
       }
     }
+    #brand-icon {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      background-color: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(5px);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      z-index: 1000;
+      color: #2D3748; /* כחול-אפור כהה לטקסט "MoodMate" */
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      font-family: 'Assistant', sans-serif;
+    }
+    #brand-icon .material-icons {
+      font-size: 24px;
+      margin-left: 0.5rem;
+      color: #6B7280; /* כחול-אפור עדין כברירת מחדל */
+      transition: color 0.3s ease;
+    }
+    /* התאמת צבע האייקון לפי מצב רוח עם גוונים מעט כהים יותר */
+    body.happy #brand-icon .material-icons {
+      color: #D4A017; /* גוון כהה יותר של #FFE5A3 */
+    }
+    body.sad #brand-icon .material-icons {
+      color: #3F528E; /* גוון כהה יותר של #8B9ED9 */
+    }
+    body.angry #brand-icon .material-icons {
+      color: #B71C1C; /* גוון כהה יותר של #F68B8B */
+    }
+    body.calm #brand-icon .material-icons {
+      color: #698F3E; /* גוון כהה יותר של #C6D4B2 */
+    }
+    body.stressed #brand-icon .material-icons {
+      color: #C05621; /* גוון כהה יותר של #F7B683 */
+    }
+    body.lonely #brand-icon .material-icons {
+      color: #7F8295; /* גוון כהה יותר של #D1D1DC */
+    }
+    body.tired #brand-icon .material-icons {
+      color: #4B5563; /* גוון כהה יותר של #A3A8B5 */
+    }
+    body.excited #brand-icon .material-icons {
+      color: #B83280; /* גוון כהה יותר של #F396C1 */
+    }
+    body.confident #brand-icon .material-icons {
+      color: #2F855A; /* גוון כהה יותר של #8CC4A2 */
+    }
+    body.scared #brand-icon .material-icons {
+      color: #5A3FC5; /* גוון כהה יותר של #A88EF5 */
+    }
+    @media (max-width: 640px) {
+      #brand-icon {
+        top: 0.5rem;
+        right: 0.5rem;
+        font-size: 0.9rem;
+        padding: 0.3rem 0.7rem;
+      }
+      #brand-icon .material-icons {
+        font-size: 20px;
+      }
+    }
   </style>
 </head>
 <body class="text-white flex flex-col items-center justify-center min-h-screen p-6">
   <canvas id="particles"></canvas>
+  <div id="brand-icon">
+    <span class="material-icons">mood</span>
+    MoodMate
+  </div>
 
   <div id="home-screen">
     <h1 id="title" class="text-4xl md:text-5xl font-bold text-gray-800 mb-4 typing">איך אתה מרגיש היום?</h1>
@@ -422,7 +492,7 @@
       <button onclick="savePage()" id="save-page-btn" tabindex="0" aria-label="שמור את התוכן של הדף הנוכחי ביומן">
         שמור
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save" viewBox="0 0 16 16">
-          <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.764l2.057-2.056a.5.5 0 0 1 .707.707l-3 3a.5.5 0 0 1-.707 0l-3-3a.5.5 0 1 1 .707-.707L7.5 9.764V2a.5.5 0 0 1 .5-.5H14a.5.5 0 0 1 .5.5v11a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5V2a.5.5 0 0 1 .5-.5h2.5a.5.5 0 0 1 0 1H2z"/>
+          <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.764l2.057-2.056a.5.5 0 0 1 .707.707l-3 3a.5.5 0 0 1-.707 0l-3-3a.5.5 0 1 1 .707-.707L7.5 9.764V2a.5.5 0 0 1 .5-.5H14a.5.5 0 0 1 .5.5v11a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5.5V2a.5.5 0 0 1 .5-.5h2.5a.5.5 0 0 1 0 1H2z"/>
         </svg>
       </button>
       <button onclick="nextPage()" id="next-page-btn" tabindex="0" aria-label="עבור לדף הבא ביומן">
@@ -526,6 +596,18 @@
         dailyTask.textContent = tasks[mood.label] || '...';
         dailyTaskTitle.textContent = 'משימה יומית';
         moodHistory.push({ mood: mood.label, score: Math.floor(Math.random() * 10) + 1, date: new Date() });
+
+        document.body.className = 'text-white flex flex-col items-center justify-center min-h-screen p-6';
+        document.body.classList.add(mood.label === "שמח" ? "happy" :
+                                   mood.label === "עצוב" ? "sad" :
+                                   mood.label === "כועס" ? "angry" :
+                                   mood.label === "רגוע" ? "calm" :
+                                   mood.label === "לחץ" ? "stressed" :
+                                   mood.label === "בדידות" ? "lonely" :
+                                   mood.label === "עייפות" ? "tired" :
+                                   mood.label === "התרגשות" ? "excited" :
+                                   mood.label === "ביטחון" ? "confident" :
+                                   mood.label === "פחד" ? "scared" : "");
       }, 500);
     }
 
@@ -543,6 +625,7 @@
           dailyTask.textContent = '';
           dailyTaskTitle.textContent = '';
           graphSection.classList.add('hidden');
+          document.body.className = 'text-white flex flex-col items-center justify-center min-h-screen p-6';
         }, 500);
       }, 500);
     }
@@ -794,6 +877,7 @@
         diaryContent.style.display = 'none';
         currentPageIndex = 0;
         direction = null;
+        document.body.className = 'text-white flex flex-col items-center justify-center min-h-screen p-6';
       }, 500);
     }
 
